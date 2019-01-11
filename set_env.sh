@@ -30,11 +30,10 @@ touch $HOME/.kube/config
 
 export KUBECONFIG=$HOME/.kube/config
 
-PATH_KUBECONFIG=$(locate kubeconfig | grep -e "kubeconfig$")
-
 sudo -E minikube start --vm-driver=none
 
 sudo updatedb
+PATH_KUBECONFIG=$(locate kubeconfig | grep -e "kubeconfig$")
 
 rm -rf ~/seba_env_simple.sh
 cat << EOF > ~/seba_env_simple.sh 
