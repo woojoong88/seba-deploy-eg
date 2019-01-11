@@ -44,6 +44,8 @@ export CHANGE_MINIKUBE_NONE_USER=true
 export KUBECONFIG=$PATH_KUBECONFIG
 EOF
 
+export KUBECONFIG=$PATH_KUBECONFIG
+
 chmod 755 ~/seba_env_simple.sh
 
 echo "" >> ~/.bashrc
