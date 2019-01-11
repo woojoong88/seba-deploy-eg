@@ -48,10 +48,23 @@ chmod 755 ~/seba_env_simple.sh
 echo "" >> ~/.bashrc
 echo "source ~/seba_env_simple.sh" >> ~/.bashrc
 
-echo "Download CORD"
+#echo "Download CORD"
+#mkdir ~/cord
+#cd ~/cord
+#git clone https://gerrit.opencord.org/helm-charts
+
+echo "get REPO"
+curl -o /tmp/repo 'https://gerrit.opencord.org/gitweb?p=repo.git;a=blob_plain;f=repo;hb=refs/heads/stable'
+echo '394d93ac7261d59db58afa49bb5f88386fea8518792491ee3db8baab49c3ecda  /tmp/repo' | sha256sum -c -
+sudo mv /tmp/repo /usr/local/bin/repo
+sudo chmod a+x /usr/local/bin/repo
+
+echo "Download CORD repositories"
 mkdir ~/cord
 cd ~/cord
-git clone https://gerrit.opencord.org/helm-charts
+repo init -u https://gerrit.opencord.org/manifest -b master
+repo sync
+cd ~
 
 echo "Download helm"
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > ~/get_helm.sh
