@@ -34,6 +34,8 @@ PATH_KUBECONFIG=$(locate kubeconfig | grep -e "kubeconfig$")
 
 sudo -E minikube start --vm-driver=none
 
+sudo updatedb
+
 rm -rf ~/seba_env_simple.sh
 cat << EOF > ~/seba_env_simple.sh 
 export MINIKUBE_WANTUPDATENOTIFICATION=false 
