@@ -29,9 +29,20 @@ touch $HOME/.kube/config
 
 export KUBECONFIG=$HOME/.kube/config
 
-sudo -E ./minikube start --vm-driver=none
+PATH_KUBECONFIG=$(locate kubeconfig | grep -e "kubeconfig$")
 
-echo "need to push below commands"
-echo "\$sudo updatedb"
-echo "\$locate kubeconfig"
-echo "\$export KUBECONFIG=/var/lib/localkube/kubeconfig"
+sudo -E minikube start --vm-driver=none
+
+rm -rf ~/seba_env_simple.sh
+cat << EOF > ~/seba_env_simple.sh \
+export MINIKUBE_WANTUPDATENOTIFICATION=false \
+export MINIKUBE_WANTREPORTERRORPROMPT=false \
+export MINIKUBE_HOME=$HOME \
+export CHANGE_MINIKUBE_NONE_USER=true \
+export KUBECONFIG=$PATH_KUBECONFIG \
+EOF
+
+chmod 755 ~/seba_env_simple.sh
+
+echo "" >> ~/.bashrc
+echo "source ~/seba_env_simple.sh" >> ~/.bashrc
